@@ -1,6 +1,7 @@
 import App from './App'
 import ErrorPage from './pages/ErrorPage'
 import Dashboard from './pages/Dashboard'
+import Login from './pages/Login'
 
 const routes = [
     {
@@ -13,6 +14,10 @@ const routes = [
                 element: <Dashboard />
             }
         ]
+    },
+    {
+        path: '/login',
+        element: <Login />
     }
 ]
 
