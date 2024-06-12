@@ -129,3 +129,38 @@ table {
 a {
   text-decoration: none;
 }
+
+/* My Styles */
+
+html {
+  font-family: 'Poppins', sans-serif;
+}
+
+header {
+  background-color: darkslategray;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo, .logout {
+  text-decoration: none;
+  color: #fff;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.logout-section {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  color: #fff;
+  align-self: center;
+}
+
+.logout {
+  line-height: normal;
+}
