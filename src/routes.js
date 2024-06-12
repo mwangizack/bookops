@@ -2,6 +2,7 @@ import App from './App'
 import ErrorPage from './pages/ErrorPage'
 import Dashboard from './pages/Dashboard'
 import Login from './pages/Login'
+import Books from './pages/Books'
 
 const routes = [
     {
@@ -12,6 +13,10 @@ const routes = [
             {
                 path: '/',
                 element: <Dashboard />
+            },
+            {
+                path: '/books',
+                element: <Books />
             }
         ]
     },
