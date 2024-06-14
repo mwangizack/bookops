@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { useOutletContext } from "react-router-dom";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import LoginIcon from "@mui/icons-material/Login";
 
 function Login() {
-  const globalData = useOutletContext()
-  const login = globalData.login
+  const globalData = useOutletContext();
+  const login = globalData.login;
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -18,33 +21,48 @@ function Login() {
 
   function handleLogin(e) {
     e.preventDefault();
-    login()
+    login();
   }
 
   return (
-    <form onSubmit={handleLogin}>
-      <label for="username">Username</label>
-      <div>
-        <input
-          id="username"
-          type="text"
-          name="username"
-          value={formData.username}
-          onChange={handleChange}
-        />
+    <div className="login-page">
+      <div className="login-form-container">
+        <h1 className="login-form-title">BookOps</h1>
+        <form onSubmit={(event) => handleLogin(event)}>
+          <div>
+            <TextField
+              type="text"
+              required
+              id="username"
+              name="username"
+              label="Username"
+              variant="standard"
+              value={formData.username}
+              onChange={(event) => handleChange(event)}
+            />
+          </div>
+          <div>
+            <TextField
+              type="password"
+              required
+              id="password"
+              name="password"
+              label="Password"
+              variant="standard"
+              onChange={(event) => handleChange(event)}
+            />
+          </div>
+          <Button
+            type="submit"
+            variant="contained"
+            endIcon={<LoginIcon />}
+            sx={{ textTransform: "capitalize", fontFamily: "Poppins" }}
+          >
+            Login
+          </Button>
+        </form>
       </div>
-      <label for="password">Password</label>
-      <div>
-        <input
-          id="password"
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-        />      
-      </div>
-      <button type="submit">Login</button>
-    </form>
+    </div>
   );
 }
 
