@@ -137,7 +137,7 @@ html {
 }
 
 header {
-  background-color: darkslategray;
+  background-color: #2f4f4f;
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
@@ -163,4 +163,41 @@ header {
 
 .logout {
   line-height: normal;
+}
+
+nav {
+  width: fit-content;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  border-right: 1px solid #fcf7f7;
+}
+
+.user-details {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.user-name-role {
+  align-self: center;
+}
+
+.user-role {
+  font-weight: 700;
+}
+
+.nav-group-title {
+  font-size: 0.8rem;
+  color: #2f4f4f;
+  margin-top: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+.nav-item {
+  display: flex;
+}
+
+.nav-link {
+  color: black;
+  margin-left: 0.3rem;
+  align-self: center;
 }
