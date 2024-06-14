@@ -17,7 +17,7 @@ function NavBar() {
       </div>
 
       <p className='nav-group-title'>BOOKS MANAGEMENT</p>
-      
+
       <div className='nav-item'>
         <LibraryBooksOutlinedIcon fontSize='small' />
         <NavLink className='nav-link' to='/books'>Books</NavLink>

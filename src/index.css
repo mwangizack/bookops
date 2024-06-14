@@ -137,6 +137,7 @@ html {
 }
 
 header {
+  width: 100vw;
   background-color: #2f4f4f;
   padding: 1rem 2rem;
   display: flex;
@@ -166,10 +167,13 @@ header {
 }
 
 nav {
-  width: fit-content;
+  flex: 0 0 auto;
+  z-index: 1;
+  min-width: 18vw;
+  height: 100vh;
   padding-left: 2rem;
   padding-right: 2rem;
-  border-right: 1px solid #fcf7f7;
+  border-right: 1px solid lightgray;
 }
 
 .user-details {
@@ -188,16 +192,68 @@ nav {
 .nav-group-title {
   font-size: 0.8rem;
   color: #2f4f4f;
-  margin-top: 1rem;
-  margin-bottom: 0.3rem;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
 }
 
 .nav-item {
   display: flex;
 }
 
+.nav-item:hover {
+  cursor: pointer;
+}
+
 .nav-link {
   color: black;
-  margin-left: 0.3rem;
+  margin-left: 0.5rem;
   align-self: center;
+}
+
+.dashboard-section {
+  flex: 1 1 auto;
+  min-height: 100vh;
+}
+
+.dashboard-cards-section {
+  background-color: rgba(246, 247, 248, 0.5);
+  height: 100vh;
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 5rem;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.dashboard-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  line-height: normal;
+  width: 300px;
+  height: 200px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 2rem 1rem;
+}
+
+.dashboard-card-title {
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: #2f4f4f;
+}
+
+.dashboard-card-metric {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.dashboard-card-link {
+  transition: all ease-out 0.3s;
+}
+
+.dashboard-card-link:hover {
+  font-size: 1.1rem;
+  text-decoration: underline;
 }

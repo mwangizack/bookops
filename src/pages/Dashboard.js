@@ -9,8 +9,8 @@ function Dashboard() {
   ));
 
   return (
-    <div>
-      <PageTitle />
+    <div className="dashboard-section">
+      <PageTitle title='Dashboard'/>
       <section className="dashboard-cards-section">{cardsToDisplay}</section>
     </div>
   );
