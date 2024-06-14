@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function DashboardCard({ cardObject }) {
-  const { cardTitle, count, route } = cardObject;
+function DashboardCard({ cardData }) {
+  const { cardTitle, count, route } = cardData;
 
   return (
     <div className="dashboard-card">
