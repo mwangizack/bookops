@@ -144,14 +144,12 @@ header {
   justify-content: space-between;
 }
 
-.logo, .logout {
+.logo {
   text-decoration: none;
   color: #fff;
-}
-
-.logo {
   font-weight: 700;
   font-size: 1.5rem;
+  align-self: center;
 }
 
 .logout-section {
@@ -160,10 +158,6 @@ header {
   gap: 0.2rem;
   color: #fff;
   align-self: center;
-}
-
-.logout {
-  line-height: normal;
 }
 
 nav {

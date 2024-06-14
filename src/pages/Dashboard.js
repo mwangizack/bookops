@@ -4,7 +4,8 @@ import DashboardCard from "../components/DashboardCard";
 import { useOutletContext } from "react-router-dom";
 
 function Dashboard() {
-  const books = useOutletContext()
+  const globalData = useOutletContext()
+  const books = globalData.books
 
   const bookCategories = books.map(book => book.category)
   const uniqueBookCategories = new Set(bookCategories)
