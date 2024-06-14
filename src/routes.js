@@ -17,6 +17,10 @@ const routes = [
                 element: <Dashboard />
             },
             {
+                path: '/login',
+                element: <Login />
+            },
+            {
                 path: '/books',
                 element: <Books />
             },
@@ -29,10 +33,6 @@ const routes = [
                 element: <LowStock />
             },
         ]
-    },
-    {
-        path: '/login',
-        element: <Login />
     }
 ]
 
