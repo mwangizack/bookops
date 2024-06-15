@@ -4,9 +4,9 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import LibraryAddOutlinedIcon from '@mui/icons-material/LibraryAddOutlined';
+import LibraryAddOutlinedIcon from "@mui/icons-material/LibraryAddOutlined";
 
-function AddBookForm({ openForm, setOpenForm }) {
+function AddBookForm({ openForm, setOpenForm, books, setBooks }) {
   const handleCloseForm = () => setOpenForm(false);
   const [formData, setFormData] = useState({
     title: "",
@@ -20,13 +20,9 @@ function AddBookForm({ openForm, setOpenForm }) {
     reorder_level: 0,
     retail_price: 0,
     buying_price: 0,
-    supplier: {
-      supplier_name: "",
-      contacts: {
-        phone_number: "",
-        email_address: "",
-      },
-    },
+    supplier_name: "",
+    supplier_phone_number: "",
+    supplier_email_address: "",
   });
 
   const modalStyle = {
@@ -35,8 +31,8 @@ function AddBookForm({ openForm, setOpenForm }) {
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: 500,
-    maxHeight: '90vh',
-    overflowY:'scroll',
+    maxHeight: "90vh",
+    overflowY: "scroll",
     bgcolor: "background.paper",
     boxShadow: 24,
     p: 4,
@@ -47,6 +43,43 @@ function AddBookForm({ openForm, setOpenForm }) {
       ...formData,
       [e.target.name]: e.target.value,
     });
+  }
+
+  function handleAddBook(e) {
+    e.preventDefault();
+    fetch("https://bookops-backend.onrender.com/books", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: formData.title,
+        authors: formData.authors.split(","),
+        cover_image: formData.cover_image,
+        summary: formData.summary,
+        publisher: formData.publisher,
+        publication_year: parseInt(formData.publication_year),
+        category: formData.category,
+        copies_available: parseInt(formData.copies_available),
+        reorder_level: parseInt(formData.reorder_level),
+        retail_price: parseInt(formData.retail_price),
+        buying_price: parseInt(formData.buying_price),
+        supplier: {
+          supplier_name: formData.supplier_name,
+          contacts: {
+            phone_number: formData.supplier_phone_number,
+            email_address: formData.supplier_email_address,
+          },
+        },
+      }),
+    })
+    .then(response => response.json())
+    .then(data => {
+      setBooks([...books, data])
+      e.target.reset()
+      handleCloseForm()
+    })
+    .catch(error => console.log(`Error adding book: ${error}`))    
   }
 
   return (
@@ -61,7 +94,7 @@ function AddBookForm({ openForm, setOpenForm }) {
           Add New Book
         </Typography>
         <hr></hr>
-        <form>
+        <form onSubmit={(event) => handleAddBook(event)}>
           <TextField
             type="text"
             fullWidth
@@ -69,7 +102,7 @@ function AddBookForm({ openForm, setOpenForm }) {
             id="title"
             name="title"
             label="Book Title"
-            variant="outlined"
+            variant="filled"
             size="small"
             sx={{ mt: 1 }}
             value={formData.title}
@@ -82,7 +115,7 @@ function AddBookForm({ openForm, setOpenForm }) {
             id="authors"
             name="authors"
             label="Author(s) seperated by commas"
-            variant="outlined"
+            variant="filled"
             size="small"
             sx={{ mt: 2 }}
             value={formData.authors}
@@ -95,7 +128,7 @@ function AddBookForm({ openForm, setOpenForm }) {
             id="cover_image"
             name="cover_image"
             label="Book cover URL"
-            variant="outlined"
+            variant="filled"
             size="small"
             sx={{ mt: 2 }}
             value={formData.cover_image}
@@ -107,7 +140,7 @@ function AddBookForm({ openForm, setOpenForm }) {
             id="summary"
             name="summary"
             label="Book summary"
-            variant="outlined"
+            variant="filled"
             size="small"
             sx={{ mt: 2 }}
             value={formData.summary}
@@ -120,7 +153,7 @@ function AddBookForm({ openForm, setOpenForm }) {
             id="publisher"
             name="publisher"
             label="Publisher..."
-            variant="outlined"
+            variant="filled"
             size="small"
             sx={{ mt: 2 }}
             value={formData.publisher}
@@ -133,7 +166,7 @@ function AddBookForm({ openForm, setOpenForm }) {
             id="publication_year"
             name="publication_year"
             label="Publication year"
-            variant="outlined"
+            variant="filled"
             size="small"
             sx={{ mt: 2 }}
             value={formData.publication_year}
@@ -146,7 +179,7 @@ function AddBookForm({ openForm, setOpenForm }) {
             id="category"
             name="category"
             label="Book genre e.g., Non-Fiction, Romance..."
-            variant="outlined"
+            variant="filled"
             size="small"
             sx={{ mt: 2 }}
             value={formData.category}
@@ -159,7 +192,7 @@ function AddBookForm({ openForm, setOpenForm }) {
             id="copies_available"
             name="copies_available"
             label="Number of copies"
-            variant="outlined"
+            variant="filled"
             size="small"
             sx={{ mt: 2 }}
             value={formData.copies_available}
@@ -172,7 +205,7 @@ function AddBookForm({ openForm, setOpenForm }) {
             id="reorder_level"
             name="reorder_level"
             label="Reorder level"
-            variant="outlined"
+            variant="filled"
             size="small"
             sx={{ mt: 2 }}
             value={formData.reorder_level}
@@ -185,7 +218,7 @@ function AddBookForm({ openForm, setOpenForm }) {
             id="retail_price"
             name="retail_price"
             label="Selling price"
-            variant="outlined"
+            variant="filled"
             size="small"
             sx={{ mt: 2 }}
             value={formData.retail_price}
@@ -198,7 +231,7 @@ function AddBookForm({ openForm, setOpenForm }) {
             id="buying_price"
             name="buying_price"
             label="Buying price"
-            variant="outlined"
+            variant="filled"
             size="small"
             sx={{ mt: 2 }}
             value={formData.buying_price}
@@ -210,41 +243,42 @@ function AddBookForm({ openForm, setOpenForm }) {
             required
             id="supplier_name"
             name="supplier_name"
-            label="Buying price"
-            variant="outlined"
+            label="Supplier's name"
+            variant="filled"
             size="small"
             sx={{ mt: 2 }}
-            value={formData.supplier.supplier_name}
+            value={formData.supplier_name}
             onChange={(event) => handleChange(event)}
           />
           <TextField
             type="text"
             fullWidth
             required
-            id="phone_number"
-            name="phone_number"
-            label="Buying price"
-            variant="outlined"
+            id="supplier_phone_number"
+            name="supplier_phone_number"
+            label="Supplier's mobile number"
+            variant="filled"
             size="small"
             sx={{ mt: 2 }}
-            value={formData.supplier.contacts.phone_number}
+            value={formData.supplier_phone_number}
             onChange={(event) => handleChange(event)}
           />
           <TextField
             type="text"
             fullWidth
-            id="phone_number"
-            name="phone_number"
-            label="Buying price"
-            variant="outlined"
+            id="supplier_email_address"
+            name="supplier_email_address"
+            label="Supplier's email address"
+            variant="filled"
             size="small"
             sx={{ mt: 2 }}
-            value={formData.supplier.contacts.email_address}
+            value={formData.supplier_email_address}
             onChange={(event) => handleChange(event)}
           />
           <Button
+            type="submit"
             startIcon={<LibraryAddOutlinedIcon />}
-            sx={{mt: 2}}
+            sx={{ mt: 2 }}
             variant="contained"
           >
             Add Book

@@ -18,7 +18,7 @@ function Books() {
   // Table rows and columns to display books
   const rows = books.map((book) => {
     return {
-      id: book.book_id,
+      id: book.id,
       title: book.title,
       cover_url: book.cover_image,
       authors: book.authors.toString(),
@@ -97,7 +97,7 @@ function Books() {
           sx={{
             fontFamily: "Poppins",
             textTransform: "capitalize",
-            marginBottom: "1rem",
+            marginBottom: "1.5rem",
           }}
           startIcon={<AddIcon />}
         >
@@ -105,7 +105,7 @@ function Books() {
         </Button>
 
         {/* Books Table */}
-        <div style={{ height: 430, width: "100%" }}>
+        <div style={{ height: 372, width: "100%" }}>
           <DataGrid
             rows={rows}
             columns={columns}
@@ -123,8 +123,10 @@ function Books() {
       <AddBookForm
         openForm={openAddBookForm}
         setOpenForm={setOpenAddBookForm}
+        books={books}
+        setBooks={setBooks}
       />
-      
+
       <UpdateBookForm 
         openForm={openUpdateBookForm}
         setOpenForm={setOpenUpdateBookForm}
