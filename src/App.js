@@ -1,10 +1,10 @@
 import React from "react";
-import ViewBook from './Components/ViewBook'; 
+import ViewBooks from './pages/ViewBooks'; 
 
 function App() {
   return (
     <div>
-      <ViewBook/>
+      <ViewBooks/>
     </div>
   );
 }

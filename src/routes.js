@@ -10,6 +10,10 @@ const routes = [
             {
                 path: '/',
                 element: <Dashboard />
+            },
+            {
+                path: 'view-books',
+                element: <ViewBooks />
             }
         ]
     }

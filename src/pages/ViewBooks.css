@@ -1,0 +1,56 @@
+.dashboard {
+    text-align: center;
+    background-color: #f0f0f0;
+    padding: 20px;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .search {
+    margin-bottom: 20px;
+  }
+  
+  .book-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 2px solid #3498db;
+    margin-top: 20px;
+  }
+  
+  .book-table th, .book-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .book-table th {
+    background-color: #3498db;
+    color: white;
+  }
+  
+  .book-table td {
+    text-align: left;
+  }
+  
+  .book-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .book-table td.actions {
+    text-align: center;
+  }
+  
+  .book-table td.actions button {
+    padding: 5px 10px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+
+  
