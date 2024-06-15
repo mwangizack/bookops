@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PageTitle from "../components/PageTitle";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
@@ -7,13 +7,15 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { DataGrid } from "@mui/x-data-grid";
+import AddBookForm from "../components/AddBookForm";
+import UpdateBookForm from "../components/UpdateBookForm";
 
 function Books() {
   const globalData = useOutletContext();
   const books = globalData.books;
-  const setBooks = globalData.setBooks
+  const setBooks = globalData.setBooks;
 
-  // Table to display books
+  // Table rows and columns to display books
   const rows = books.map((book) => {
     return {
       id: book.book_id,
@@ -30,16 +32,17 @@ function Books() {
   const columns = [
     { field: "id", headerName: "ID", width: 30 },
     { field: "title", headerName: "Book Title", width: 160 },
-    { field: "cover_url", 
-    headerName: "Cover", 
-    width: 100, 
-    renderCell: (params) => (
+    {
+      field: "cover_url",
+      headerName: "Cover",
+      width: 100,
+      renderCell: (params) => (
         <img
           src={params.value}
           alt="Book cover"
-          style={{ width: '40px', height: '40px' }}
+          style={{ width: "40px", height: "40px" }}
         />
-      ) 
+      ),
     },
     { field: "authors", headerName: "Author(s)", width: 130 },
     { field: "pub_year", headerName: "Pub Year", width: 90 },
@@ -55,7 +58,7 @@ function Books() {
         <>
           <IconButton
             aria-label="update"
-            onClick={() => handleUpdate(params.row.id)}
+            onClick={() => handleOpenUpdateBookForm()}
             color="success"
             size="small"
             style={{ marginRight: "0.5rem" }}
@@ -75,14 +78,14 @@ function Books() {
     },
   ];
 
+  // Popup forms variables
+  const [openAddBookForm, setOpenAddBookForm] = useState(false);
+  const handleOpenAddBookForm = () => setOpenAddBookForm(true);
+  const [openUpdateBookForm, setOpenUpdateBookForm] = useState(false)
+  const handleOpenUpdateBookForm = () => setOpenUpdateBookForm(true);
+
   // Handlers
-  function handleUpdate(id){
-
-  }
-
-  function handleDelete(id){
-
-  }
+  function handleDelete(id) {}
 
   return (
     <div className="books-section">
@@ -90,6 +93,7 @@ function Books() {
       <section className="books-table-section">
         <Button
           variant="contained"
+          onClick={() => handleOpenAddBookForm()}
           sx={{
             fontFamily: "Poppins",
             textTransform: "capitalize",
@@ -100,6 +104,7 @@ function Books() {
           Add New Book
         </Button>
 
+        {/* Books Table */}
         <div style={{ height: 430, width: "100%" }}>
           <DataGrid
             rows={rows}
@@ -113,6 +118,17 @@ function Books() {
           />
         </div>
       </section>
+
+      {/* Modal forms for saving and updating*/}
+      <AddBookForm
+        openForm={openAddBookForm}
+        setOpenForm={setOpenAddBookForm}
+      />
+      
+      <UpdateBookForm 
+        openForm={openUpdateBookForm}
+        setOpenForm={setOpenUpdateBookForm}
+      />
     </div>
   );
 }
