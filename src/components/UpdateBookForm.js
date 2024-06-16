@@ -254,6 +254,7 @@ function UpdateBookForm({
           />
           <Button
             type="submit"
+            disabled={loading}
             startIcon={<CheckCircleOutlineOutlinedIcon />}
             sx={{ mt: 2 }}
             variant="contained"

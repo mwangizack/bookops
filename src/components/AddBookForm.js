@@ -8,6 +8,8 @@ import LibraryAddOutlinedIcon from "@mui/icons-material/LibraryAddOutlined";
 
 function AddBookForm({ openForm, setOpenForm, books, setBooks }) {
   const handleCloseForm = () => setOpenForm(false);
+  const [loading, setLoading] = useState(false);
+
   const [formData, setFormData] = useState({
     title: "",
     authors: [],
@@ -47,6 +49,7 @@ function AddBookForm({ openForm, setOpenForm, books, setBooks }) {
 
   function handleAddBook(e) {
     e.preventDefault();
+    setLoading(true)
     fetch("https://bookops-backend.onrender.com/books", {
       method: "POST",
       headers: {
@@ -58,6 +61,7 @@ function AddBookForm({ openForm, setOpenForm, books, setBooks }) {
     .then(data => {
       setBooks([...books, data])
       e.target.reset()
+      setLoading(false)
       handleCloseForm()
     })
     .catch(error => console.log(`Error adding book: ${error}`))    
@@ -258,11 +262,12 @@ function AddBookForm({ openForm, setOpenForm, books, setBooks }) {
           />
           <Button
             type="submit"
+            disabled={loading}
             startIcon={<LibraryAddOutlinedIcon />}
             sx={{ mt: 2 }}
             variant="contained"
           >
-            Add Book
+            {loading ? 'Adding...' : 'Add Book'}
           </Button>
         </form>
       </Box>
