@@ -23,7 +23,7 @@ function App() {
     } else {
       navigate("/login");
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, navigate]);
 
   useEffect(() => {
     fetch("https://bookops-backend.onrender.com/books")
