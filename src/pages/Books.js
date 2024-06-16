@@ -87,11 +87,29 @@ function Books() {
   const [openUpdateBookForm, setOpenUpdateBookForm] = useState(false);
   const handleOpenUpdateBookForm = () => setOpenUpdateBookForm(true);
 
+  // Update book variables
+  const [selectedBookData, setSelectedBookData] = useState({
+    title: "",
+    authors: [],
+    cover_image: "",
+    summary: "",
+    publisher: "",
+    publication_year: 1900,
+    category: "",
+    copies_available: 0,
+    reorder_level: 0,
+    retail_price: 0,
+    buying_price: 0,
+    supplier_name: "",
+    supplier_phone_number: "",
+    supplier_email_address: "",
+  });
+
   // Handlers
   function handleSelectedBookDetails(id) {
     fetch(`https://bookops-backend.onrender.com/books/${id}`)
       .then((response) => response.json())
-      .then((data) => console.log(data))
+      .then((data) => setSelectedBookData(data))
       .catch((error) =>
         console.log(`Error getting selected book's details: ${error}`)
       );
@@ -142,6 +160,8 @@ function Books() {
       <UpdateBookForm
         openForm={openUpdateBookForm}
         setOpenForm={setOpenUpdateBookForm}
+        selectedBookData={selectedBookData}
+        setSelectedBookData={setSelectedBookData}
       />
     </div>
   );

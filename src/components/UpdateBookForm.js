@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
@@ -6,24 +6,8 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
 
-function UpdateBookForm({ openForm, setOpenForm }) {
+function UpdateBookForm({ openForm, setOpenForm, selectedBookData, setSelectedBookData }) {
   const handleCloseForm = () => setOpenForm(false);
-  const [formData, setFormData] = useState({
-    title: "",
-    authors: [],
-    cover_image: "",
-    summary: "",
-    publisher: "",
-    publication_year: 1900,
-    category: "",
-    copies_available: 0,
-    reorder_level: 0,
-    retail_price: 0,
-    buying_price: 0,
-    supplier_name: "",
-    supplier_phone_number: "",
-    supplier_email_address: "",
-  });
 
   const modalStyle = {
     position: "absolute",
@@ -39,8 +23,8 @@ function UpdateBookForm({ openForm, setOpenForm }) {
   };
 
   function handleChange(e) {
-    setFormData({
-      ...formData,
+    setSelectedBookData({
+      ...selectedBookData,
       [e.target.name]: e.target.value,
     });
   }
@@ -95,7 +79,7 @@ function UpdateBookForm({ openForm, setOpenForm }) {
     >
       <Box sx={modalStyle}>
         <Typography id="modal-modal-title" variant="h6" component="h2">
-          Update Book
+          {!selectedBookData ? 'Loading...' : 'Update Book'}
         </Typography>
         <hr></hr>
         <form onSubmit={(event) => handleUpdateBook(event)}>
@@ -109,7 +93,7 @@ function UpdateBookForm({ openForm, setOpenForm }) {
             variant="filled"
             size="small"
             sx={{ mt: 1 }}
-            value={formData.title}
+            value={selectedBookData.title}
             onChange={(event) => handleChange(event)}
           />
           <TextField
@@ -122,7 +106,7 @@ function UpdateBookForm({ openForm, setOpenForm }) {
             variant="filled"
             size="small"
             sx={{ mt: 2 }}
-            value={formData.authors}
+            value={selectedBookData.authors}
             onChange={(event) => handleChange(event)}
           />
           <TextField
@@ -135,7 +119,7 @@ function UpdateBookForm({ openForm, setOpenForm }) {
             variant="filled"
             size="small"
             sx={{ mt: 2 }}
-            value={formData.cover_image}
+            value={selectedBookData.cover_image}
             onChange={(event) => handleChange(event)}
           />
           <TextField
@@ -147,7 +131,7 @@ function UpdateBookForm({ openForm, setOpenForm }) {
             variant="filled"
             size="small"
             sx={{ mt: 2 }}
-            value={formData.summary}
+            value={selectedBookData.summary}
             onChange={(event) => handleChange(event)}
           />
           <TextField
@@ -160,7 +144,7 @@ function UpdateBookForm({ openForm, setOpenForm }) {
             variant="filled"
             size="small"
             sx={{ mt: 2 }}
-            value={formData.publisher}
+            value={selectedBookData.publisher}
             onChange={(event) => handleChange(event)}
           />
           <TextField
@@ -173,7 +157,7 @@ function UpdateBookForm({ openForm, setOpenForm }) {
             variant="filled"
             size="small"
             sx={{ mt: 2 }}
-            value={formData.publication_year}
+            value={selectedBookData.publication_year}
             onChange={(event) => handleChange(event)}
           />
           <TextField
@@ -186,7 +170,7 @@ function UpdateBookForm({ openForm, setOpenForm }) {
             variant="filled"
             size="small"
             sx={{ mt: 2 }}
-            value={formData.category}
+            value={selectedBookData.category}
             onChange={(event) => handleChange(event)}
           />
           <TextField
@@ -199,7 +183,7 @@ function UpdateBookForm({ openForm, setOpenForm }) {
             variant="filled"
             size="small"
             sx={{ mt: 2 }}
-            value={formData.copies_available}
+            value={selectedBookData.copies_available}
             onChange={(event) => handleChange(event)}
           />
           <TextField
@@ -212,7 +196,7 @@ function UpdateBookForm({ openForm, setOpenForm }) {
             variant="filled"
             size="small"
             sx={{ mt: 2 }}
-            value={formData.reorder_level}
+            value={selectedBookData.reorder_level}
             onChange={(event) => handleChange(event)}
           />
           <TextField
@@ -225,7 +209,7 @@ function UpdateBookForm({ openForm, setOpenForm }) {
             variant="filled"
             size="small"
             sx={{ mt: 2 }}
-            value={formData.retail_price}
+            value={selectedBookData.retail_price}
             onChange={(event) => handleChange(event)}
           />
           <TextField
@@ -238,7 +222,7 @@ function UpdateBookForm({ openForm, setOpenForm }) {
             variant="filled"
             size="small"
             sx={{ mt: 2 }}
-            value={formData.buying_price}
+            value={selectedBookData.buying_price}
             onChange={(event) => handleChange(event)}
           />
           <TextField
@@ -251,7 +235,7 @@ function UpdateBookForm({ openForm, setOpenForm }) {
             variant="filled"
             size="small"
             sx={{ mt: 2 }}
-            value={formData.supplier_name}
+            value={selectedBookData.supplier_name}
             onChange={(event) => handleChange(event)}
           />
           <TextField
@@ -264,7 +248,7 @@ function UpdateBookForm({ openForm, setOpenForm }) {
             variant="filled"
             size="small"
             sx={{ mt: 2 }}
-            value={formData.supplier_phone_number}
+            value={selectedBookData.supplier_phone_number}
             onChange={(event) => handleChange(event)}
           />
           <TextField
@@ -276,7 +260,7 @@ function UpdateBookForm({ openForm, setOpenForm }) {
             variant="filled"
             size="small"
             sx={{ mt: 2 }}
-            value={formData.supplier_email_address}
+            value={selectedBookData.supplier_email_address}
             onChange={(event) => handleChange(event)}
           />
           <Button
