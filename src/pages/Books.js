@@ -58,7 +58,10 @@ function Books() {
         <>
           <IconButton
             aria-label="update"
-            onClick={() => handleOpenUpdateBookForm()}
+            onClick={() => {
+              handleOpenUpdateBookForm();
+              handleSelectedBookDetails(params.row.id);
+            }}
             color="success"
             size="small"
             style={{ marginRight: "0.5rem" }}
@@ -81,10 +84,37 @@ function Books() {
   // Popup forms variables
   const [openAddBookForm, setOpenAddBookForm] = useState(false);
   const handleOpenAddBookForm = () => setOpenAddBookForm(true);
-  const [openUpdateBookForm, setOpenUpdateBookForm] = useState(false)
+  const [openUpdateBookForm, setOpenUpdateBookForm] = useState(false);
   const handleOpenUpdateBookForm = () => setOpenUpdateBookForm(true);
 
+  // Update book variables
+  const [selectedBookData, setSelectedBookData] = useState({
+    title: "",
+    authors: [],
+    cover_image: "",
+    summary: "",
+    publisher: "",
+    publication_year: 1900,
+    category: "",
+    copies_available: 0,
+    reorder_level: 0,
+    retail_price: 0,
+    buying_price: 0,
+    supplier_name: "",
+    supplier_phone_number: "",
+    supplier_email_address: "",
+  });
+
   // Handlers
+  function handleSelectedBookDetails(id) {
+    fetch(`https://bookops-backend.onrender.com/books/${id}`)
+      .then((response) => response.json())
+      .then((data) => setSelectedBookData(data))
+      .catch((error) =>
+        console.log(`Error getting selected book's details: ${error}`)
+      );
+  }
+
   function handleDelete(id) {}
 
   return (
@@ -127,9 +157,13 @@ function Books() {
         setBooks={setBooks}
       />
 
-      <UpdateBookForm 
+      <UpdateBookForm
         openForm={openUpdateBookForm}
         setOpenForm={setOpenUpdateBookForm}
+        selectedBookData={selectedBookData}
+        setSelectedBookData={setSelectedBookData}
+        books={books}
+        setBooks={setBooks}
       />
     </div>
   );
