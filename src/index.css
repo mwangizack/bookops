@@ -205,9 +205,15 @@ nav {
   align-self: center;
 }
 
-.dashboard-section, .books-section {
+.dashboard-section, .books-section, .reorders-section, .categories-section {
   flex: 1 1 auto;
   min-height: 100vh;
+}
+
+.reorders-content-section, .categories-content-section {
+  background-color: rgba(246, 247, 248, 0.5);
+  height: 100vh;
+  padding: 2rem;
 }
 
 .dashboard-cards-section {
