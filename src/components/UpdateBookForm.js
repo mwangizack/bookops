@@ -1,13 +1,21 @@
-import React from "react";
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
+import React, { useState } from "react";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
+import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
 
-function UpdateBookForm({ openForm, setOpenForm, selectedBookData, setSelectedBookData }) {
+function UpdateBookForm({
+  openForm,
+  setOpenForm,
+  selectedBookData,
+  setSelectedBookData,
+  books,
+  setBooks,
+}) {
   const handleCloseForm = () => setOpenForm(false);
+  const [loading, setLoading] = useState(false);
 
   const modalStyle = {
     position: "absolute",
@@ -29,45 +37,26 @@ function UpdateBookForm({ openForm, setOpenForm, selectedBookData, setSelectedBo
     });
   }
 
-  // function handleAddBook(e) {
-  //   e.preventDefault();
-  //   fetch("https://bookops-backend.onrender.com/books", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       title: formData.title,
-  //       authors: formData.authors.split(","),
-  //       cover_image: formData.cover_image,
-  //       summary: formData.summary,
-  //       publisher: formData.publisher,
-  //       publication_year: parseInt(formData.publication_year),
-  //       category: formData.category,
-  //       copies_available: parseInt(formData.copies_available),
-  //       reorder_level: parseInt(formData.reorder_level),
-  //       retail_price: parseInt(formData.retail_price),
-  //       buying_price: parseInt(formData.buying_price),
-  //       supplier: {
-  //         supplier_name: formData.supplier_name,
-  //         contacts: {
-  //           phone_number: formData.supplier_phone_number,
-  //           email_address: formData.supplier_email_address,
-  //         },
-  //       },
-  //     }),
-  //   })
-  //   .then(response => response.json())
-  //   .then(data => {
-  //     setBooks([...books, data])
-  //     e.target.reset()
-  //     handleCloseForm()
-  //   })
-  //   .catch(error => console.log(`Error adding book: ${error}`))    
-  // }
-
-  function handleUpdateBook(e){
-    e.preventDefault()
+  function handleUpdateBook(e) {
+    e.preventDefault();
+    setLoading(true);
+    fetch(`https://bookops-backend.onrender.com/books/${selectedBookData.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(selectedBookData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setBooks(
+          books.map((book) => (book.id === selectedBookData.id ? data : book))
+        );
+        e.target.reset();
+        setLoading(false)
+        handleCloseForm();
+      })
+      .catch((error) => console.log(`Error updating book's details: ${error}`));
   }
 
   return (
@@ -79,7 +68,7 @@ function UpdateBookForm({ openForm, setOpenForm, selectedBookData, setSelectedBo
     >
       <Box sx={modalStyle}>
         <Typography id="modal-modal-title" variant="h6" component="h2">
-          {!selectedBookData ? 'Loading...' : 'Update Book'}
+          {!selectedBookData ? "Loading..." : "Update Book"}
         </Typography>
         <hr></hr>
         <form onSubmit={(event) => handleUpdateBook(event)}>
@@ -269,7 +258,7 @@ function UpdateBookForm({ openForm, setOpenForm, selectedBookData, setSelectedBo
             sx={{ mt: 2 }}
             variant="contained"
           >
-            Update
+            {loading ? "Updating..." : "Update"}
           </Button>
         </form>
       </Box>

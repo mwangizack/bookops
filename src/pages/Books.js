@@ -162,6 +162,8 @@ function Books() {
         setOpenForm={setOpenUpdateBookForm}
         selectedBookData={selectedBookData}
         setSelectedBookData={setSelectedBookData}
+        books={books}
+        setBooks={setBooks}
       />
     </div>
   );
