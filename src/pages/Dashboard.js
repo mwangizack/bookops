@@ -38,7 +38,7 @@ function Dashboard() {
   const cardsToDisplay = reports.map((report) => (
     <DashboardCard cardData={report} />
   ));
-
+  
   return (
     <div className="dashboard-section">
       <PageTitle title='Dashboard'/>

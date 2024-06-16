@@ -196,15 +196,16 @@ nav {
 
 .nav-item:hover {
   cursor: pointer;
+  color: #1976D2;
 }
 
 .nav-link {
-  color: black;
+  color: inherit;
   margin-left: 0.5rem;
   align-self: center;
 }
 
-.dashboard-section {
+.dashboard-section, .books-section {
   flex: 1 1 auto;
   min-height: 100vh;
 }
@@ -287,4 +288,10 @@ nav {
 
 .login-form-container form button {
   border-radius: 1em;
+}
+
+.books-table-section {
+  background-color: rgba(246, 247, 248, 0.5);
+  height: 100vh;
+  padding: 2rem;
 }

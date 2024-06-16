@@ -34,6 +34,7 @@ function App() {
 
   const globalData = {
     books: books,
+    setBooks: setBooks,
     login: login,
   };
 
