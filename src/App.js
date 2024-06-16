@@ -3,7 +3,6 @@ import Header from "./components/Header";
 import NavBar from "./components/NavBar";
 import Box from "@mui/material/Box";
 import { useEffect, useState } from "react";
-import UpdateBookComponent from "./components/UpdateBookComponent";
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -54,9 +53,6 @@ function App() {
           <Outlet context={globalData} />
         </>
       )}
-      <>
-        <UpdateBookComponent />
-      </>
     </>
   );
 }
