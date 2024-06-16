@@ -52,26 +52,7 @@ function AddBookForm({ openForm, setOpenForm, books, setBooks }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        title: formData.title,
-        authors: formData.authors.split(","),
-        cover_image: formData.cover_image,
-        summary: formData.summary,
-        publisher: formData.publisher,
-        publication_year: parseInt(formData.publication_year),
-        category: formData.category,
-        copies_available: parseInt(formData.copies_available),
-        reorder_level: parseInt(formData.reorder_level),
-        retail_price: parseInt(formData.retail_price),
-        buying_price: parseInt(formData.buying_price),
-        supplier: {
-          supplier_name: formData.supplier_name,
-          contacts: {
-            phone_number: formData.supplier_phone_number,
-            email_address: formData.supplier_email_address,
-          },
-        },
-      }),
+      body: JSON.stringify(formData),
     })
     .then(response => response.json())
     .then(data => {
