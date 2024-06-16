@@ -115,7 +115,19 @@ function Books() {
       );
   }
 
-  function handleDelete(id) {}
+  function handleDelete(id) {
+    fetch(`https://bookops-backend.onrender.com/books/${id}`, {
+      method: 'DELETE',
+    })
+      .then((response) => response.json())
+      .then(() => {
+        setBooks(books.filter(book => book.id !== id))
+        alert('Book deleted!')
+      })
+      .catch((error) =>
+        console.log(`Error deleting book: ${error}`)
+      );
+  }
 
   return (
     <div className="books-section">
